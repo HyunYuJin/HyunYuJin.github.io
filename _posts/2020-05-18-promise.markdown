@@ -1,11 +1,10 @@
 ---
-title: "Promise"
-categories:
-  - Javascript
-tags:
-  - Javascript
-  - ES6
+layout: post
+title: Promise
+date: 2020-05-18 20:36:00
+description: 자바스크립트 공부
 ---
+
 # Promise란?
 자바스크립트 비동기 처리에 사용되는 객체
 
@@ -93,7 +92,7 @@ new Promise() 메서드를 호출할 때 콜백 함수를 선언할 수 있고, 
 
 ```javascript
 new Promise(function(resolve, reject) {
-	
+
 })
 ```
 
@@ -171,20 +170,20 @@ getData().then(function(data) {
 ```javascript
 function getData() {
 	return new Promise({
-		
+
 	});
 }
 
 // then()으로 여러 개의 Promise를 연결
 getData()
 	.then(function(data1) {
-		
+
 	})
 	.then(function(data2) {
-		
+
 	})
 	.then(function(data3) {
-		
+
 	})
 ```
 

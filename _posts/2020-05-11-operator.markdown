@@ -1,10 +1,8 @@
 ---
-title: "연산자"
-categories:
-  - Javascript
-tags:
-  - Javascript
-  - ES6
+layout: post
+title: 연산자
+date: 2020-05-11 13:09:00
+description: 자바스크립트 공부
 ---
 
 # 캐스팅 연산자
@@ -50,7 +48,7 @@ console.log(!!2); // true
 ```
 
 # 쉼표(,) 연산자의 비밀
-쉼표 또한 연산자이고 반환값이 있다. 
+쉼표 또한 연산자이고 반환값이 있다.
 가장 우측에 있는 값을 반환한다.
 
 ```javascript

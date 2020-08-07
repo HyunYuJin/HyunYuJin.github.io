@@ -1,10 +1,8 @@
 ---
-title: "인터페이스 (Interface)"
-categories:
-  - Javascript
-tags:
-  - Javascript
-  - ES6
+layout: post
+title: 인터페이스 (Interface)
+date: 2020-05-14 15:09:00
+description: 자바스크립트 공부
 ---
 
 ### 인터페이스는 객체나 클래스가 아닌 하나의 **명세**라고 볼 수 있다.

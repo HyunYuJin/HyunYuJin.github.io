@@ -1,10 +1,8 @@
 ---
-title: "ES의 탄생 배경"
-categories:
-  - Javascript
-tags:
-  - Javascript
-  - ES6
+layout: post
+title: ES의 탄생 배경
+date: 2020-05-10 12:09:00
+description: 자바스크립트 공부
 ---
 
 ### 자바스크립트는 언어이고, ES는 스펙이다.
@@ -13,7 +11,7 @@ tags:
 # JS? ES?
 <img src="../assets/images/ECMAScript.jpg" />
 
-JS(JavaScript)는 **언어**, ES는 **스펙**이다. 
+JS(JavaScript)는 **언어**, ES는 **스펙**이다.
 IE8(Internet Explorer 8)에서는 **ES3 스펙을 준수**한 거고, IE9(Internet Explorer 9)에서는 **ES5 스펙을 준수**한 거다. 그럼 우리가 여태까지 알고 있던 자바스크립트를 ES라고 불러야할까?
 * 자바스크립트
   * ES5까지의 내용을 그냥 자바스크립트라고 부른다.
@@ -29,7 +27,7 @@ IE8(Internet Explorer 8)에서는 **ES3 스펙을 준수**한 거고, IE9(Intern
   * 해체 할당, Spread 연산자
   * 템플릿 리터럴
   * 클래스
-  
+
   이 외에도 특징이 엄청 많아서 사람들이 장벽을 느낀다. 일단 브라우저에서 지원해주지 않는 경우가 많아 **Babel**이라는 트랜스파일러를 쓴다.
   * Babel
     * Babel은 웹 브라우저가 아니라 Node.js 위에서 돌아가고

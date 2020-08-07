@@ -1,10 +1,8 @@
 ---
-title: "Modularization (모듈화)"
-categories:
-  - Javascript
-tags:
-  - Javascript
-  - ES6
+layout: post
+title: Modularization (모듈화)
+date: 2020-05-11 12:09:00
+description: 자바스크립트 공부
 ---
 
 # 스코프 문제

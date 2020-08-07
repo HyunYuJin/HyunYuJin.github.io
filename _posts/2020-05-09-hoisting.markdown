@@ -1,15 +1,13 @@
 ---
-title: "Hoisting? (호이스팅?)"
-categories:
-  - Javascript
-tags:
-  - Javascript
-  - ES6
+layout: post
+title: Hoisting? (호이스팅?)
+date: 2020-05-09 10:09:00
+description: 자바스크립트 공부
 ---
 
-### Hoisting: 끌어 올리기, 들어올려 나르기
+#### Hoisting: 끌어 올리기, 들어올려 나르기
 
-# Hoisting의 뜻
+##### Hoisting의 뜻
 말 그대로 끌어올리는 것이다. **코드를!**
 내가 선언하기 전에 사용된 변수, 즉 **없는 변수**가 갑자기 튀어나와서 undefined를 내뱉고 프로그램이 죽지 않는 이유는 호이스팅이 일어났기 때문이다.
 함수 선언문에서 변수 없이 함수를 선언한 것이므로 전체 코드가 호이스팅이 일어났다.

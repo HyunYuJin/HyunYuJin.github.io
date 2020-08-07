@@ -1,9 +1,8 @@
 ---
-title: "아임 포트 (I'm port;)"
-categories:
-  - on-demand
-tags:
-  - App I'mPort
+layout: post
+title: 아임 포트 (I'm port;)
+date: 2020-06-01 14:36:00
+description: App I'mPort
 ---
 
 Online Payment 기능을 개발하는 결제 API 서비스
@@ -139,7 +138,7 @@ impSecret: '자신의_APIscret_키'
 ```javascript
 app.get('/payments/status/all',(req,res)=>{
       iamport.payment.getByStatus({
-        payment_status: 'paid' 
+        payment_status: 'paid'
       }).then(function(result){
           res.render('payments_list',{list:result.list});
       }).catch(function(error){
