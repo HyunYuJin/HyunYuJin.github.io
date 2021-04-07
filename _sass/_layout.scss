@@ -264,6 +264,7 @@
 .img_row{
   max-height: $img_height;
   width: 100%;
+  overflow: scroll;
   box-sizing:border-box;
   padding: $img_spacing;
 }
