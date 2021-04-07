@@ -21,9 +21,6 @@ React에서는 무엇인가를 변경할 때, 변경된 지점을 미리 체크�
 그렇다면 더티체크를 한다는 것은 무엇일까요?
 플래그가 꽂힌 부분을 더티체크한다고 합니다.
 <div class="img_row">
-	<img class="col three" src="/img/dirty-check.png">
-</div>
-<div class="img_row">
 	<img class="col three" src="{{ site.baseurl }}/img/dirty-check.png">
 </div>
 가상 DOM과 기존 DOM을 비교할 때는 이 더티체크가 된 부분을 확인하고 처리합니다!

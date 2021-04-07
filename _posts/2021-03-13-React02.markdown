@@ -30,9 +30,6 @@ description: 함수형 컴포넌트 선언방식, 클래스형 컴포넌트 선�
 단, 클래스형 컴포넌트에서만 사용할 수 있습니다.
 
 <div class="img_row">
-	<img class="col three" src="/img/react-lifecycle.png">
-</div>
-<div class="img_row">
 	<img class="col three" src="{{ site.baseurl }}/img/react-lifecycle.png">
 </div>
 

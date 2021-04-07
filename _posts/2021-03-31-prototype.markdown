@@ -37,9 +37,6 @@ Javascript에서 함수를 정의하면 동시에 해당 함수의 <code style="
 ### 객체 멤버
 이해를 쉽게 돕기 위해 저는 오리 이야기🐥를 예로들겠습니다.
 <div class="img_row">
-	<img class="col three" src="/img/prototype01.jpg">
-</div>
-<div class="img_row">
 	<img class="col three" src="{{ site.baseurl }}/img/prototype01.jpg">
 </div>
 
