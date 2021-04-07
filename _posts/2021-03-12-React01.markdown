@@ -1,0 +1,128 @@
+---
+layout: post
+title: React 선언 방식
+date: 2021-03-12
+description: 함수형 컴포넌트 선언방식, 클래스형 컴포넌트 선언방식
+---
+
+> 💡 React에서 컴포넌트를 선언하는 방식은 2가지가 있습니다.
+기존에 사용하였던 클래스형 컴포넌트 선언방식,
+새로 추가된 함수형 컴포넌트 선언방식입니다.
+오늘은 버킷리스트 페이지를 만들며 연습해본 이 두가지 선언 방식에 대해서 정리해보겠습니다 :)
+
+<br />
+
+### 1. 클래스형 컴포넌트 선언 방식
+<ul>
+  <li>
+    constructor() 내에서의 <code style="color: #FF3636;">this</code>
+    <ul>
+      <li>component가 생성될 때 이 클래스에 this.xx라는 매개변수를 만들어주는 것입니다.</li>
+    </ul>
+  </li>
+</ul>
+
+```javascript
+import React from 'react';
+import './App.css';
+import BucketList from './BucketList';
+
+// 해당 컴포넌트가 어떤식으로 동작할지에 대해 더 세세하게 작성을 합니다.
+class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = { // App 컴포넌트의 state를 정의합니다.
+      list: ['a', 'b', 'c'],
+    };
+  }
+
+  // 랜더 함수 안에 리액트 엘리먼트
+  render() {
+    // 만든 state를 불러오기
+    console.log(this.state);
+
+    return (
+      <div className="App">
+        <h1>내 버킷리스트</h1>
+        {/* state에 list라는 값을 넘겨줍니다. */}
+        <BucketList list={ this.state.list } />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+<br />
+
+### 2. 함수형 컴포넌트 선언방식
+원래는 함수형 컴포넌트는 덤프 컴포넌트라는 별명을 가질정도로 state 값을 가질 수 없었습니다.
+하지만 등장한 <code style="color: #FF3636;">React hooks</code>를 이용해서 <code style="color: #FF3636;">state</code> 값을 가질 수 있게 되었습니다.
+
+```javascript
+import React from 'react';
+import './App.css';
+import BucketList from './BucketList';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>내 버킷리스트</h1>
+      <BucketList/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+<br />
+
+#### 함수형 자식 컴포넌트 선언 방식
+
+파일 이름과 함수 이름이 동일해야합니다.
+
+```javascript
+// 리액트 패키지를 불러오기
+import React from 'react';
+
+function Bucketlist(props){
+    return (
+        <div>버킷 리스트</div>
+    );
+}
+
+```
+
+<br />
+
+#### const 선언 방식
+파일 이름과 변수명이 동일해야합니다.
+( ) 안에 props는 부모 컴포넌트에게 받아온 데이터가 들어갑니다.
+
+```javascript
+// 리액트 패키지를 불러오기
+import React from 'react';
+
+// const BucketList = (props) => {
+    // console.log(props); // state 값이 잘 넘어오는지 확인
+
+const BucketList = ({ list }) => {
+    const my_lists = list;
+
+    // 컴포넌트가 뿌려줄 리엑트 엘리먼트를 반환
+    return (
+        <div>
+            {
+                my_lists.map((list, index) => {
+                    return (<div key={ index }>{ list }</div>);
+                })
+            }
+        </div>
+    );
+}
+
+export default BucketList;
+```

@@ -1,0 +1,115 @@
+---
+layout: post
+title: Javascript 4가지의 for문 차이
+date: 2020-08-05
+description: Basic for, forEach, for of, for in
+---
+
+> 💡 Javascript의 for문은 총 4가지 형태가 있습니다.
+이 4가지에는 각각 어떤 차이가 있고 어떨 때 사용을 하는지에 대해서 알아보겠습니다.
+
+<br />
+
+### for문의 4가지 종류
+보통 자바스크립트의 for문은 4가지 형태가 있습니다.
+<ul>
+	<li><code style="color: #2698BA;">Basic for</code></li>
+	<li><code style="color: #11D68B;">for in</code></li>
+	<li><code style="color: #F29105">forEach</code></li>
+	<li><code style="color: #B509AC">for of</code></li>
+</ul>
+
+그렇다면 이들의 차이점은 무엇일까요?
+```javascript
+const array = ['A', 'B', 'C', 'D'];
+
+// Basic
+for (let i = 0; i < array.length; i++) {
+	console.log(array[i]);
+}
+
+// ForEach
+array.forEach(function(j) {
+  console.log(array[j]);
+});
+
+// For in
+for (let k in array) {
+  console.log(array[k]);
+}
+
+// For of
+for (let z of array) {
+  console.log(array[z]);
+}
+
+return 0;
+```
+
+<br />
+
+#### 결과
+<ol>
+	<li><code style="color: #2698BA;">Basic for</code>와 <code style="color: #11D68B;">for in</code>의 경우는 <code style="background-color: #B7D12A;">반복 변수의 index</code>를 <code style="color: #FF3636;">return</code>합니다.</li>
+	<li><code style="color: #F29105">forEach</code>와 <code style="color: #B509AC">for of</code>는 <code style="background-color: #B7D12A;">해당 값</code>을 <code style="color: #FF3636;">return</code>합니다.</li>
+</ol>
+
+사실, 이전에 검색해봤을 때는 <code style="color: #B509AC">for of</code>인 경우는 <code style="color: #FF3636;">Symbol.iterator</code>일 경우만 가능하다고하여 잘 안와닿았는데 일단은 위와 같이 쉽게 이해해두면 될 것같습니다.
+
+<br />
+
+#### forEach
+그럼 먼저, <code style="color: #F29105">forEach</code>에 대하여 좀더 살펴볼까요?
+콜백함수의 매개변수는 3가지입니다.
+
+1. 해당 값
+2. index
+3. 배열
+
+하나의 매개변수만 설정되어 있으면 1번의 해당 값이 <code style="color: #FF3636;">return</code> 됩니다.
+그래서 위의 예시에서  하나의 매개변수만 설정되어 있기 때문에 해당 값이 <code style="color: #FF3636;">return</code>된 것입니당!
+
+```javascript
+const array = ['A', 'B', 'C', 'D'];
+
+/// ForEach
+array.forEach((해당값, index, 배열) => {
+	console.log(해당값, index, 배열);
+});
+```
+
+<br/>
+
+#### for of
+그 다음으로는 <code style="color: #B509AC">for of</code>에 대해서 살펴볼게요!
+반복문을 돌면서 해당 값만 뽑아내고 싶을 때 아주 쉽고 유용하게 사용되는 친구입니다.
+<code style="color: #F29105">forEach</code>와 비슷한 기능을 하지만 callback 함수가 필요 없습니다.
+그래서 <code style="color: #B509AC">for of</code>가 등장했다고 합니다!
+
+```javascript
+const array = ['A', 'B', 'C', 'D'];
+
+for (let i of array) {
+	console.log(i);
+}
+```
+
+<br />
+
+#### for in
+마지막으로 Object에서도 쓸 수 있는 <code style="color: #11D68B;">for in</code>에 대해서 살펴보겠습니다.
+
+```javascript
+const object = { 1: "A", 2: "B", 3: "C", 4: "D" };
+
+for (let z in object) {
+  console.log(object[z]);
+}
+```
+
+<br/>
+
+<hr>
+<br/>
+<br/>
+참고문헌: <a href="https://aljjabaegi.tistory.com/354">알짜배기 프로그래머의 블로그</a>

@@ -1,0 +1,35 @@
+---
+layout: post
+title: 더티 체크
+date: 2021-03-14
+description: 가상 DOM과 기존의 DOM을 비교할 때의 방식
+---
+
+> 💡 React의 가상DOM을 사용하는 것까지는 알겠는데 기존의 DOM과 비교할 때 어떤 원리? 방식?으로 비교되는지 궁금했습니다.
+알아보니 더티체크를 통해서 비교를 한다고 하는데요, React에서 가상 DOM과 기존 DOM을 비교하는 방법에 대해서 정리해보겠습니다.
+
+### React에서 변경이 발생할 때
+React에서는 무엇인가를 변경할 때, 변경된 지점을 미리 체크해둡니다.
+
+<code style="color: #2698BA;">React</code>: 여기가 변했어! 플래그를 꽂아둘게!
+
+보통 <code style="color: #FF3636;">setState</code>처럼 리렌더링을 유발하는 요소들에 체크를 해두는 로직이 녹아져 있다고 생각하면 됩니다.
+
+<br />
+
+### 더티체크(Dirty Check)
+그렇다면 더티체크를 한다는 것은 무엇일까요?
+플래그가 꽂힌 부분을 더티체크한다고 합니다.
+<div class="img_row">
+	<img class="col three" src="/img/dirty-check.png">
+</div>
+<div class="img_row">
+	<img class="col three" src="{{ site.baseurl }}/img/dirty-check.png">
+</div>
+가상 DOM과 기존 DOM을 비교할 때는 이 더티체크가 된 부분을 확인하고 처리합니다!
+
+#### 그렇다면 처리는 어디에서 하나요?
+바로 더티체크 처리는 <code style="background-color: #65d381;">Virtual DOM</code>에서 합니다!
+더티체크가 완료되고나서, 실제 DOM으로 결과물을 내보내줍니다.
+
+→ 이런 것을 React의 [diff 알고리즘](https://calendar.perfplanet.com/2013/diff/) 이라고 합니다.
