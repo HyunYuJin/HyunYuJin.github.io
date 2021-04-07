@@ -1,0 +1,209 @@
+---
+layout: post
+title: Git-flow
+date: 2021-03-30
+description: 작업의 통일성을 목적으로 만들어진 방법론
+---
+
+> 💡 Git-flow는 10년전 쯤 Vincent Driessen이라는 사람이 고안한 Workflow로 작업의 통일성을 목적으로 만들어진 방법론입니다.
+Git으로 협업하며 개발자들 각각이 작성한 코드를 합치고 배포할 때 많이 사용되는 Git-flow에 대해서 정리해보겠습니다.
+
+<br/>
+
+### Git-flow의 branch
+Git-flow는 총 5가지의 branch를 사용합니다.
+* master: 기준이 되는 branch로 제품을 배포하는 branch입니다.
+* develop: 개발자들이 사용하는 개발 branch로 각각 작업한 기능(feature)들을 합치는 branch입니다.
+* feature: 기능 단위로 개발하는 branch로 기능 개발이 완료되면 develop branch에 합칩니다.
+    * 해당 branch는 보통 개발자 저장소에만 있고 origin에는 push하지 않습니다.
+    * 혹은, 기능을 다른 개발자와 공동적으로 개발한다면 origin에 게시하여 함께 사용합니다.
+    * develop에 병합시킬 때 `--no-ff` 옵션을 주어 병합된 히스토리를 기록하는 것이 좋습니다.
+* release: master branch로 보내서 배포하기 전에 품질검사(QA)를 위한 branch입니다.
+* hotfix: master branch로 배포했는데 버그가 생긴다면 긴급 수정을 하는 branch 입니다.
+
+<br/>
+
+### Git-flow 진행 과정
+
+#### 초기 설정
+
+우선 제대로 동작할 수 있도록 개인 로컬 PC에 설치를 진행해주어야 합니다.
+
+저는 Mac OS를 사용하기 때문에 Homebrew
+`brew install git-flow-avh`로 설치를 진행하였습니다.
+
+이후 git 저장소 내에서 git-flow를 초기화 합니다.
+`git flow init` 를 진행하고 모든 질문에 기본 값으로 설정해주었습니다.
+
+<br/>
+
+#### 진행 과정
+
+<div class="img_row">
+	<img class="col three" src="{{ site.baseurl }}/img/git-flow.png">
+</div>
+
+```bash
+git flow init
+```
+
+1. 우선 시작은 master branch에서 합니다.
+2. develop branch도 생성합니다. (개발자들은 해당 branch에서 개발을 진행합니다.)
+3. 개발을 진행하면서 기능 구현이 필요한 경우 해당 기능을 담당하는 개발자는 feature branch를 하나 생성해서 해당 branch에서 기능을 구현합니다.
+
+    ```bash
+    git flow feature start [feature name]
+    ```
+
+    - 작업이 완료되면
+
+    ```bash
+    git add . (or [파일이름])
+
+    git status
+
+    git commit -m ['commit msg']
+
+    git push origin feature/[feature name]  기능을 만든 feature branch에 push
+    ```
+
+    - 잘못 생성한 경우
+
+    ```bash
+    git branch -D feature/[feature name]
+    ```
+    <div class="img_row">
+    	<img class="col three" src="{{ site.baseurl }}/img/git-flow-feature.png">
+    </div>
+
+    → 이때, 해당 기능을 확실히 넣을거라 판단될 때 merge를 하고 결과가 실망스러울 경우 아예 버리기도 합니다.
+
+
+4. 완료된 feature branch는 검토과정을 거친 후 다시 develop branch에 합칩니다.
+
+    ```bash
+    git flow feature finish [feature name]
+    ```
+
+    - develop branch로 자동 checkout
+    - feature branch 변경 내용을 자동을 develop branch에 merge
+    - 작업이 끝난 feature branch를 삭제
+
+    - 다른 개발자의 변경 내용을 가져오는 방법
+
+        ```bash
+        git flow feature pull origin [feature name]
+        ```
+
+    - branch 삭제
+
+        ```bash
+        git branch -d [branch name]
+        ```
+
+    - branch 변경
+
+        ```bash
+        git checkout [branch name]
+        ```
+
+    - git flow의 현재 branch 또는 feature가 뭐가 있는지 보고 싶을 때
+
+        ```bash
+        git flow init -f
+        ```
+
+5. 모든 기능 구현을 완료하면 develop branch에서 release branch를 생성합니다.
+
+    ```bash
+    git flow release start [release name]
+    ```
+
+6. QA 담당자들은 해당 branch에서 보완점을 보완하고 개발자들은 버그를 픽스합니다. (버그 수정 사항은 develop branch에도 적용해주어야 합니다.)
+7. 모든 과정이 완료되면 release branch를 master, develop 각각의 branch로 보내줍니다.
+
+    ```bash
+    git add . (or [파일이름])
+
+    git status
+
+    git commit -m ['commit msg']
+
+    git push origin release/[release name]
+    ```
+
+    ```bash
+    git flow release finish [release name]
+    ```
+
+    해당 과정이 끝나고나면 **'master' 'origin/master' have diverged** 라는 warning이 뜨는데 이는 master로가서 pull하여 `merge`해주면 해결이 되었습니다.
+    (사실 여기부분에 대한 것의 해결방법이 맞는지 잘 모르겠고 왜 이런 경고가 뜨게 되었는지와 이유에 대해서 더 연구해보아야 합니당..)
+
+    * release branch를 master branch에 병합합니다.
+    * release name으로 tag가 붙습니다. - (보통 버전을 표시?)
+    * develop branch로 재병합(back-merge)합니다.
+    * release branch가 삭제됩니다.
+8. merge된 develop branch에서 원격 저장소에 저장합니다.
+
+    ```bash
+    git push origin develop
+    ```
+
+    이러고 나면, master branch에 pull request가 갈 것입니다.
+
+    그러면 master branch에서는 `merge` 작업을 진행해주고 로컬환경에서 `pull`을 해줍니다.
+
+9. master branch에서는 버전 관리를 위해 버전 태그를 생성하고 배포를 진행합니다. release 명으로 tag가 생성될 것입니다.
+
+    ```bash
+    git push --tags
+    ```
+
+10. 배포 완료 후 미처 발견하지 못한 버그가 있을 수 있습니다. 이때 master에서 hotfix branch를 생성해서 긴급 수정한 후 태그를 생성해 바로 배포를 진행합니다.
+    * hotfix 시작
+
+    ```bash
+    git flow hotfix start [hotfix name] (일반적으로 버전정보를 씁니다.)
+    ```
+
+    ```bash
+    git add . (or [파일이름])
+
+    git status
+
+    git commit -m ['commit msg']
+
+    git push origin hotfix/[hotfix name]
+    ```
+
+    * hotfix 완료
+
+    ```bash
+    git flow hotfix finish [hotfix name]
+    ```
+
+<br />
+### 그 외에..
+
+### github-flow
+
+github-flow는 github가 Hub의 성격으로 **오픈 소스가 공유** 되고, **여러 사람들이 pull request를 보낼 수 있어** 복잡하다는 의견으로 생긴 workflow입니다.
+
+여러 다른 branch를 신경쓰지 않고 오직 **main branch** 만 관리합니다.
+
+단, main branch에 엄격한 권한을 두기 때문에 pull request에 엄격하답니다.
+
+### gitlab-flow
+
+gitlab-flow는 일반적으로 github-flow와 거의 비슷하지만 추가로 **자동배포 기능(CI/CD)** 을 가지고 있습니다.
+* CI/CD: 애플리케이션 개발 단계를 자동화하여 짧은 주기로 고객에게 제공하는 방법입니다.
+
+때문에, main branch 하나만 두고 작업하기에는 에러가 발생할지도 모르는 상황 때문에 불안정할 수 있습니다.
+
+그래서! **release branch** 를 두고 해당 branch에서 **모든 버그를 수정** 한 후 main branch로 merge를 진행해 자동배포를 진행하도록하는 workflow입니다.
+
+<br />
+<hr />
+<br />
+##### 참고
+[https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html](https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html)
