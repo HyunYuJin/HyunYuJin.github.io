@@ -262,7 +262,7 @@
 }
 
 .img_row{
-  height: $img_height;
+  max-height: $img_height;
   width: 100%;
   box-sizing:border-box;
   padding: $img_spacing;
