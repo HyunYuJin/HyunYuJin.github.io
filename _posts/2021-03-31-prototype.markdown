@@ -18,7 +18,7 @@ Javascript에서 함수를 정의하면 동시에 해당 함수의 <code style="
 
 이 <code style="color: #FF3636;">prototype</code>은 <code style="color: #FF3636;">Prototype Object</code>를 참조합니다.
 
-<code style="color: #FF3636;">Prototype Object</code>는 기본적으로 멤버 변수로 <code style="color: #FF3636;">constructor</code>와 <code style="color: #FF3636;">Prototype Link</code>라는 `__proto__`</code>를 가지고 있습니다.
+<code style="color: #FF3636;">Prototype Object</code>는 기본적으로 멤버 변수로 <code style="color: #FF3636;">constructor</code>와 <code style="color: #FF3636;">Prototype Link</code>라는 <code>`__proto__`</code>를 가지고 있습니다.
 
 여기서 <code style="color: #FF3636;">constructor</code> 속성은 함수를 참조합니다.
 
