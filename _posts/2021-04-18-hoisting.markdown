@@ -1,0 +1,101 @@
+---
+layout: post
+title: 호이스팅
+date: 2021-04-18
+description: undefined와 uninitialized
+---
+
+> 💡 자바스크립트를 사용하면서 어떤 변수는 undefined를 뿜어내고, 어떤 경우에는 Uncaught ReferenceError: Cannot access ~ before initialized 라는 오류를 내뿜는 것을 볼 수 있었습니다.
+왜 그런지에 대해서 공부해보며 호이스팅이 무엇인지 살펴보겠습니다!
+
+<br />
+
+### 자바스크립트 엔진의 메모리 세팅
+자바스크립트 엔진은 스크립트를 받게되면, 가장 먼저 하는 일이 <code style="background-color: #FFF83A;">메모리를 세팅하는 것</code>입니다.
+이 단계는 코드가 실행되기 전 단계이며, 쉽게 말해서 실행을 하기 전에 준비단계 정도입니다.
+
+함수가 저장되는 방식과 변수가 저장되는 방식은 조금 차이가 있습니다.
+
+<br />
+#### 함수
+함수의 경우에는 전체 함수에 대한 참조와 함께 저장이 됩니다.
+```javascript
+function sum (x, y) {
+  return x + y;
+}
+```
+
+| NAME | VALUE        |
+|------|--------------|
+| sum  | < function > |
+
+<br />
+#### 변수
+자, 우리 자바스크립트에서는 변수를 선언하는 방식이 대표적으로 3가지가 있다는 것을 알고 있습니다!
+<code style="color: #FF3636;">var</code>와 ES6에서 추가된 <code style="color: #FF3636;">const</code>, <code style="color: #FF3636;">let</code> 이렇게 3가지가 있죠?
+
+여기서 주의 깊게 보셔야할 것이 바로 이 <code style="color: #FF3636;">const</code>, <code style="color: #FF3636;">let</code>인데, 이유는 이 두 변수들은 <code style="background-color: #FFF83A;">초기화가 되지 않은 상태로 저장</code>된다고 합니다.
+반면에 <code style="color: #FF3636;">var</code>로 선언된 변수들은 default로 <code style="background-color: #FFF83A;">undefined</code>가 저장된다고 합니다.
+
+```javascript
+const name = "Yu Jin";
+
+let info = {
+  height: 123;
+  weight: 12
+};
+
+var city = "Suwon";
+```
+
+| NAME | VALUE             |
+|------|-------------------|
+| name | < uninitialized > |
+| info | < uninitialized > |
+| city | undefined         |
+
+<br />
+
+### 실제 코드 실행
+메모리에 생성단계가 끝나고나면 실제로 코드를 실행합니다.
+
+자! 만약에 파일의 맨 첫문장에 <code style="color: #FF3636;">console.log</code> 구문이 있다고 합시다.
+☞ 이는 변수들의 실제적인 선언 전의 zone이라고 해서 <code style="background-color: #79c3e5; color: #555;">temporal dead zone</code>이라고도 부릅니다.
+
+<br />
+#### 함수
+함수의 경우는 전체 함수 코드에 대한 참조와 함께 저장되었기 때문에 함수를 생성하기 전에도 호출이 가능니다.
+
+<br />
+#### 변수
+그렇다면 변수는?
+우선, <code style="color: #FF3636;">var</code>의 경우는 변수가 선언되기 전부터 참조를 하게되면 undefined를 return할 것입니다.
+
+하지만 <code style="color: #FF3636;">const</code>, <code style="color: #FF3636;">let</code>의 경우는 uninitialized이기 때문에 ReferenceError를 return 합니다.
+
+<br />
+
+### 메모리에 실질 값 저장
+자바스크립트 엔진이 변수를 실질적으로 선언한 라인을 넘어가면 메모리에 있는 값들이 실제로 선언한 값들로 덮어 씌워집니다.
+| NAME | VALUE        |
+|------|--------------|
+| sum  | < function > |
+| name | "Yu Jin"     |
+| info | < object >   |
+| city | "Suwon"      |
+
+
+<br />
+
+### 호이스팅
+즉, 함수와 변수들은 우리가 코드를 실행하기 전에 **실행 컨텍스트** 를 위해 메모리에 저장되는데 이것이 호이스팅의 개념입니다.
+
+> 실행 컨텍스트: 자바스크립트 코드가 실행되는 범위
+
+
+
+<br />
+<hr />
+<br />
+##### 참고
+[https://kkangdda.tistory.com/73](https://kkangdda.tistory.com/73)
