@@ -23,10 +23,12 @@ UI/UX 디자인의 '디'자도 모를때 대화를 통해 얻게 된 지식입�
 	<img class="col three" src="{{ site.baseurl }}/img/UX01.jpeg">
 </div>
 
-여기서 타시오는 그냥 차량 호출앱으로 생각하시면 됩니다.
 <div class="img_row">
 	<img class="col three" src="{{ site.baseurl }}/img/UX02.jpeg">
 </div>
+여기서 타시오는 그냥 차량 호출앱으로 생각하시면 됩니다.
+
+<br />
 
 #### UI 디자인이란?
 <div class="img_row">
@@ -64,6 +66,8 @@ UI/UX 디자인의 '디'자도 모를때 대화를 통해 얻게 된 지식입�
   주의할 점은, (애니메이션 !== 인터렉션)이라는 것! 물론 포함은 되지만!</li>
   <li>목업: 주로 디자인 시안 및 평가를 위한 디자인으로 평가를 위한 디자인입니다.</li>
 </ul>
+
+<br />
 
 <ul>
   <li>GNB: 원 뎁스. 앱 최상단에 위치한 메뉴입니다.</li>
