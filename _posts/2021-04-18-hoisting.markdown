@@ -6,7 +6,7 @@ description: undefined와 uninitialized
 ---
 
 > 💡 자바스크립트를 사용하면서 어떤 변수는 undefined를 뿜어내고, 어떤 경우에는 Uncaught ReferenceError: Cannot access ~ before initialized 라는 오류를 내뿜는 것을 볼 수 있었습니다.
-왜 그런지에 대해서 공부해보며 호이스팅이 무엇인지 살펴보겠습니다!
+**선언은 되어 있지만 값이 할당되지 않은 경우, 오류가 나지 않고 값을 끌어올린다는 개념**의 호이스팅. 공부해보며 좀 더 자세하게 살펴보겠습니다!
 
 <br />
 
@@ -17,8 +17,10 @@ description: undefined와 uninitialized
 함수가 저장되는 방식과 변수가 저장되는 방식은 조금 차이가 있습니다.
 
 <br />
+
 #### 함수
 함수의 경우에는 전체 함수에 대한 참조와 함께 저장이 됩니다.
+
 ```javascript
 function sum (x, y) {
   return x + y;
@@ -30,6 +32,7 @@ function sum (x, y) {
 | sum  | < function > |
 
 <br />
+
 #### 변수
 자, 우리 자바스크립트에서는 변수를 선언하는 방식이 대표적으로 3가지가 있다는 것을 알고 있습니다!
 <code style="color: #FF3636;">var</code>와 ES6에서 추가된 <code style="color: #FF3636;">const</code>, <code style="color: #FF3636;">let</code> 이렇게 3가지가 있죠?
@@ -63,10 +66,12 @@ var city = "Suwon";
 ☞ 이는 변수들의 실제적인 선언 전의 zone이라고 해서 <code style="background-color: #79c3e5; color: #555;">temporal dead zone</code>이라고도 부릅니다.
 
 <br />
+
 #### 함수
 함수의 경우는 전체 함수 코드에 대한 참조와 함께 저장되었기 때문에 함수를 생성하기 전에도 호출이 가능니다.
 
 <br />
+
 #### 변수
 그렇다면 변수는?
 우선, <code style="color: #FF3636;">var</code>의 경우는 변수가 선언되기 전부터 참조를 하게되면 undefined를 return할 것입니다.
@@ -89,14 +94,93 @@ var city = "Suwon";
 <br />
 
 ### 호이스팅
-즉, 함수와 변수들은 우리가 코드를 실행하기 전에 **실행 컨텍스트** 를 위해 메모리에 저장되는데 이것이 호이스팅의 개념입니다.
+이제 호이스팅에 대해서 좀 더 자세하게 살펴보겠습니다!
 
-> 실행 컨텍스트: 자바스크립트 코드가 실행되는 범위
+호이스팅의 대상은 
+<ul>
+  <li><code style="color: #FF3636;">var로 선언한 변수</code></li>
+  <li><code style="color: #FF3636;">함수 선언문</code></li>
+</ul>
+입니다.
 
+<br />
+
+### var, const, let
+위에 메모리 세팅에 관한 설명을 보셨 듯, const, let은 uninitialize로 세팅되는 반면, var는 undefined로 세팅되는 것을 알 수 있습니다. 그래서 var은 호이스팅의 대상이 된다고 보시면 될 것같습니다.
+
+```javascript
+console.log(duck); // undefined
+var duck = "Pretty Duck";
+console.log(dick); // Pretty Duck
+```
+위의 코드를 보면 가장 첫번째 문장이 undefined로 출력되는 것은,
+
+```javascript
+var duck;
+console.log(duck); // undefined
+duck = "Pretty Duck";
+console.log(dick); // Pretty Duck
+```
+다음처럼 가장 최상단으로 끌어올려지는 호이스팅이 일어났기 때문입니다.
+
+<br />
+
+### 함수 선언문과 함수 표현식에서의 호이스팅
+함수 선언문과는 달리, 변수에 할당되는 함수 표현식의 경우는 끌어올려지지 않아 호이스팅이 되지 않는다고 하는데요, 이는 변수의 스코프 규칙을 따른다고 합니다.
+
+#### 함수 표현식
+```javascript
+duckGroup(); // duckGroup is not a function
+
+var duckGroup = function() {
+  console.log("a is not a function");
+};
+```
+위 코드에 duckGroup is not a function라는 에러가 출력되는 이유는,
+
+```javascript
+var duckGroup;
+duckGroup(); // duckGroup is not a function
+
+duckGroup = function() {
+  console.log("a is not a function");
+};
+```
+다음처럼 duckGroup이라는 변수가 최상단으로 끌어올려져서 아직 함수인지를 모르는 상태에서 호출을 했기 때문입니다.
+
+<br />
+
+### 함수 선언식
+반면, 함수 선언식은 스코프 내 어떤 위치에서 함수를 선언하든지 호출을 할 수 있습니다.
+```javascript
+duckName();
+
+function duckName(){
+  console.log('pretty duck');
+}
+```
+
+```javascript
+function duckName(){
+  console.log('pretty duck');
+}
+
+duckName();
+```
+<br />
+
+#### 호이스팅을 왜 알아야하나요?
+
+사실상 코드의 가독성과 유지보수를 위해서는 호이스팅이 되도록이면 일어나지 않도록 하는 것이 좋습니다. 
+그렇기 때문에 가능하면 변수나 함수를 가급적이면 상단부에 선언을 하고 
+const, let을 사용하는 편이 좋다고하네요.
+
+> 그래도 우리는 var가 어떻게 동작하는지는 알아야하기 때문에 호이스팅의 개념이 중요하게 여겨지는 것같습니다. 아직 ES6가 어디에서든지 사용 가능하지 않은 한계 때문인 것같네여ㅠㅠ
 
 
 <br />
 <hr />
 <br />
+
 ##### 참고
 [https://kkangdda.tistory.com/73](https://kkangdda.tistory.com/73)
