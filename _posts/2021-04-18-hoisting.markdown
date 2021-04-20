@@ -92,6 +92,7 @@ var city = "Suwon";
 
 
 <br />
+<br />
 
 ### 호이스팅
 이제 호이스팅에 대해서 좀 더 자세하게 살펴보겠습니다!
@@ -105,8 +106,8 @@ var city = "Suwon";
 
 <br />
 
-### var, const, let
-위에 메모리 세팅에 관한 설명을 보셨 듯, const, let은 uninitialize로 세팅되는 반면, var는 undefined로 세팅되는 것을 알 수 있습니다. 그래서 var은 호이스팅의 대상이 된다고 보시면 될 것같습니다.
+### 변수에서의 호이스팅
+위에 메모리 세팅에 관한 설명을 보셨 듯, <code style="color: #FF3636;">const</code>, <code style="color: #FF3636;">let</code>은 uninitialize로 세팅되는 반면, <code style="color: #FF3636;">var</code>는 undefined로 세팅되는 것을 알 수 있습니다. 그래서 var은 호이스팅의 대상이 된다고 보시면 될 것같습니다.
 
 ```javascript
 console.log(duck); // undefined
@@ -150,7 +151,7 @@ duckGroup = function() {
 
 <br />
 
-### 함수 선언식
+#### 함수 선언식
 반면, 함수 선언식은 스코프 내 어떤 위치에서 함수를 선언하든지 호출을 할 수 있습니다.
 ```javascript
 duckName();
