@@ -1,0 +1,39 @@
+---
+layout: post
+title: HTML
+date: 2021-04-23
+description: HTML tag 정리를 해보자!
+---
+
+> 💡 잠시 소홀해졌던 HTML에 대해서 정리를 해보겠습니당
+
+<br />
+
+### 자주 사용되는 TAG
+
+<ol>
+  <li>html: 웹 페이지의 시작과 끝 입니다.</li>
+  <li>
+    head: 웹 페이지의 정보, 문서에서 사용할 외부 파일들을 링크합니다.
+    <ul>
+      <li>title: 문서 제목을 표시합니다. 페이지를 방문하는 방문자나 검색엔진은 제목 표시줄의 제목을 보고 내용을 예측하기 때문에 잘 써주어야 합니다.</li>
+      <li>meta: 문자 인코딩 및 문서 키워드, 요약 정보를 표시합니다. (utf-8: 웹 페이지의 문자 인코딩 방식을 utf-8로 지정한다는 뜻)</li>
+      <li>
+        link: 외부 파일을 연결할 때 사용합니다.
+        <ul>
+          <li>rel="stylesheet": 연결할 파일이 stylesheet라는 의미입니다.</li>
+          <li>type="text/css": 스타일시트 코드가 텍스트 파일로 된 CSS 유형이라는 의미입니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>body: 브라우저에 실제로 표시되는 내용들이 들어갑니다.</li>
+</ol>
+
+
+<br />
+<hr />
+<br />
+
+##### 참고
+[https://pridiot.tistory.com/6](https://pridiot.tistory.com/6)

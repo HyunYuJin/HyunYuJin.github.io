@@ -1,0 +1,45 @@
+---
+layout: post
+title: Reference Error
+date: 2021-04-22
+description: JS에서의 Error
+---
+
+> 💡 JS를 실행함에 있어서 Error가 발생했을 때 이에 대해서 솔직히 깊이 있는 학습을 해보지 못했습니다. 오늘은 이 부분에 대해서 살펴보려고 합니다.
+
+<br />
+
+### 에러가 나면 중단?
+
+JS는 인터프린트 언어이기 때문에, 브라우저가 JS 해석 도중에 Error가 발생하면, 해석이 중단됩니다.
+
+해석이 완료된 이후의 동작 중에 에러가 발생된다면, 동작이 중단됩니다.
+
+모든 에러는 console에 error로 기록이 되고 모든 Error는 Error 이벤트가 발생되게 됩니다.
+
+<br />
+
+### Reference Error
+Reference Error 객체는 존재하지 않은 변수를 참조했을 때 발생하는 에러입니다.
+
+```javascript
+new ReferenceError([message[, fileName, [, lineNumber]]])
+```
+
+<ul>
+  <li>message: 선택사항. 에러에 대한 설명문</li>
+  <li>fileName: 선택사항. 예외가 발생한 코드를 포함하는 파일의 이름</li>
+  <li>lineNumber: 선택사항. 예외가 발생한 코드의 줄 번호</li>
+</ul>
+
+<br />
+
+즉!!!⭐⭐⭐  
+Reference Error는 선언된 적이 없는 변수를 참조하려고 할 때 발생합니다!!!
+
+<br />
+<hr />
+<br />
+
+##### 참고
+[https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError)
