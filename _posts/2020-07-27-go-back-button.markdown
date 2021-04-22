@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 🔙 Javascript 뒤로가기 버튼 막기 이벤트 제어
+title: Javascript 뒤로가기 버튼 막기 이벤트 제어
 date: 2020-07-27
 description: 페이지에서 임의로 뒤로가기 버튼 막기
 ---
