@@ -22,11 +22,30 @@ JS는 인터프린트 언어이기 때문에, 브라우저가 JS 해석 도중�
 ### Error 타입
 JS에서는 방식에 따라 여러 Error 타입이 존재합니다.
 
+<ul>
+  <li>message: 선택사항. 에러에 대한 설명문</li>
+  <li>fileName: 선택사항. 예외가 발생한 코드를 포함하는 파일의 이름</li>
+  <li>lineNumber: 선택사항. 예외가 발생한 코드의 줄 번호</li>
+</ul>
+
+
 #### SyntaxError
-JS에서 발생된 문법 에러입니다.
+JS에서 문법적으로 유효하지 않은 코드를 해석하려고 시도할 때 발생하는 오류입니다.
+
+```javascript
+new SyntaxError([message[, fileName[, lineNumber]]])
+```
+
+<br />
 
 #### RangeError
 허용한 범위를 넘는 값을 적용하려고 할 때 발생합니다.
+
+```javascript
+new RangeError([message[, fileName[, lineNumber]]])
+```
+
+<br />
 
 #### ReferenceError
 Reference Error 객체는 존재하지 않은 변수를 참조했을 때 발생하는 에러입니다.
@@ -35,26 +54,46 @@ Reference Error 객체는 존재하지 않은 변수를 참조했을 때 발생�
 new ReferenceError([message[, fileName, [, lineNumber]]])
 ```
 
-<ul>
-  <li>message: 선택사항. 에러에 대한 설명문</li>
-  <li>fileName: 선택사항. 예외가 발생한 코드를 포함하는 파일의 이름</li>
-  <li>lineNumber: 선택사항. 예외가 발생한 코드의 줄 번호</li>
-</ul>
+<br />
 
 #### TypeError
-해당 값이 원하는 형식의 타입이 아닐 때 발생합니다.
+해당 값이 기대하던 자료형이 아니라서 연산을 할 수 없을 때 발생하는 오류입니다.
+
+```javascript
+new TypeError([message[, fileName[, lineNumber]]])
+```
+
+
+<div style="border: 1px solid #eed4d4; margin: 10px 0 20px; padding: 0.7rem; border-radius: 5px">
+  <p style="color: #444; font-weight: 600;">JS의 타입 (7종류)</p>
+  <ol>
+    <li>Number</li>
+    <li>String</li>
+    <li>Object</li>
+    <li>Undefined</li>
+    <li>Boolean</li>
+    <li>Symbol</li>
+    <li>Null</li>
+  </ol>
+</div>
+
+<br />
 
 #### URLError
 URI 형태가 올바르지 않을 때 발생합니다.
 
+<br />
+
 #### EvalError
 evel() 메서드에서 에러가 발생할 때 발생합니다.
+
+```javascript
+new EvalError([message[, fileName[, lineNumber]]])
+```
 
 
 <br />
 
-즉!!!⭐⭐⭐  
-Reference Error는 선언된 적이 없는 변수를 참조하려고 할 때 발생합니다!!!
 
 <br />
 <hr />
