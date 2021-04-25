@@ -10,13 +10,52 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 
 <br />
 
-### Function Scope(전역 스코프)
+### Function Scope(함수 스코프)
 
+함수 스코프는 함수에 의해서 생기는 유효범위 입니다.  
+요건 이전시간에 살펴보았죠?😉
 
 <br />
 
 ### Block Scope(블록 스코프)
 
+블럭('{}') 에 의해서 생기는 유효범위 입니다.  
+조금 헷갈리실 수 있는데 그냥 쉽게 {}로 쌓여진 것은 전부 블록 스코프라고 보시면 됩니다!  
+<span style="color: #006ff7;">ex. for문, switch문, while문 ...</span>
+
+<br />
+
+### var, const / let의 스코프
+
+var은 함수 스코프를 따르지만, 블록 스코프를 따르지 않습니다.
+
+#### 함수 스코프
+```javascript
+var a = 30;
+
+(function() {
+  var a = 10;
+
+  (function() {
+      var a = 20;
+      console.log(a); // 20
+  })()
+  
+    console.log(a) // 10
+})()
+
+console.log(a); // ReferenceError: a is not defined
+```
+
+#### 블록 스코프
+```javascript
+if (true){
+  var var_name = 'var 미더덕';
+  let let_name = 'let 미더덕';
+}
+console.log(var_name); // var 미더덕
+console.log(let_name); // ReferenceError: let_name is not defined
+```
 
 <br />
 <hr />
