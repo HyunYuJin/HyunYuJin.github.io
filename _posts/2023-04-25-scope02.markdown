@@ -1,0 +1,26 @@
+---
+layout: post
+title: Scope-2
+date: 2021-04-25
+description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 대해서 알아보자!
+---
+
+> 💡 지난시간에는 Global Scope(전역 스코프), Local Scope(지역 스코프)에 대해서 살펴보았습니다.
+> 이번시간에는 ES6에서 등장한 const, let과 관련하여 Function Scope(함수 스코프)와 Block Scope(블록 스코프)에 대해서도 알아보겠습니다 :)
+
+<br />
+
+### Function Scope(전역 스코프)
+
+
+<br />
+
+### Block Scope(블록 스코프)
+
+
+<br />
+<hr />
+<br />
+
+##### 참고
+[https://velog.io/@ksh4820/var-let-const-%EC%B0%A8%EC%9D%B4%EC%A0%90](https://velog.io/@ksh4820/var-let-const-%EC%B0%A8%EC%9D%B4%EC%A0%90)
