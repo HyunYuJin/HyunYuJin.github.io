@@ -1,0 +1,98 @@
+---
+layout: post
+title: Scope-1
+date: 2021-04-25
+description: Global Scope? Local Scope? 유효범위가 대체 뭐야!?
+---
+
+> 💡 JS를 공부하다보면 scope라는 것을 많이 접해보셨을텐데요, 저도 scope에 대해서 알고 있다고 생각했는데 설명을 해달라하면 깔끔하게 정리가 안되더라고요ㅠㅠ
+> 그래서! 오늘은 확실하게 정리해보도록 할게요! scope는 Global Scope(전역 스코프), Local Scope(지역 스코프) 2개의 타입으로 나눠 볼 수 있는데요 각각의 정의와 차이점에 대해서 알아보겠습니다.
+
+<br />
+
+### Scope(스코프)란?
+
+정말 그냥 단순하게 **변수에 접근할 수 있는 범위**를 의미합니다.  
+JS에서는 함수를 선언하게되면 자동적으로 새로운 Scope를 생성하게 됩니다.
+
+어느 곳에서든지 접근할 수 있는 변수, 해당 지역에서만 접근할 수 있는 변수가 있는데요 이것이 각각 Global Scope, Local Scope 입니다.
+
+<br />
+
+### Global Scope(전역 스코프)
+
+**어느 위치에서든지 접근할 수 있는 변수**는 전역 스코프의 유효 범위에 있습니다.
+
+다음 코드에서 함수 외부에 선언되어 있는 duck 변수는 전역 스코프 입니다.
+
+```javascript
+var duck = '글로벌 미더덕'; // 전역 스코프
+
+function duck_family() { // 지역(함수) 스코프
+ var duck = '미더덕';
+ duck = '지역 미더덕';
+}
+
+duck_family(); // 지역 미더덕으로 변경
+console.log("Global Duck: ",duck); // 미더덕
+```
+
+함수 내부에서 duck의 값을 '지역 미더덕'이라고 변경했죠?
+그런데 실제로 함수 바깥에서 출력을 해보면 여전히 '미더덕'으로 출력되는 것을 볼 수 있습니다.
+
+**이것이 바로 함수의 스코프(유효범위) 때문인거에요!**
+
+<br />
+
+사실 전역 변수를 만드는 것은 최대한 지양해야한다고 합니다. (저도 이것 때문에 일주일 내내 삽질해본 경험이 있답니다..😹)  
+함수 외부에 전역 변수를 선언한다는 것은 window 객체 내부에 변수를 만듭니다.
+
+<div style="border: 1px solid #eed4d4; margin: 10px 0 20px; padding: 0.7rem; border-radius: 5px">
+  <p style="color: #444; font-weight: 600;">✋잠깐! 그럼 window 객체가 뭐냐구요?</p>
+
+  바로 브라우저의 모든 요소와  자바스크립트 엔진, 모든 변수들을 담고 있는 객체입니다.  
+  우리가 자주 사용하는 <code style="color: #FF3636;">parseInt()</code>, <code style="color: #FF3636;">isNaN()</code>과 같은 메소드나 <code style="color: #FF3636;">location</code>, <code style="color: #FF3636;">history</code>, <code style="color: #FF3636;">document</code>와 같은 객체들 아시죠? 이들은 모두 <code style="color: #2b67ff;">window</code>의 자손들이에요.  
+  
+  이처럼 <code style="color: #2b67ff;">window</code>는 모든 객체를 포함하고 있기 때문에 **모든 자손들의 조상**이고 생략이 가능한 전역객체입니다.
+  그래서 우리가 <code style="color: #FF3636;">window.parseInt()</code>라는 형식을 쓰지 않고, <code style="color: #FF3636;">parseInt()</code>라고 쓰는 것이죠!
+</div>
+
+그래서 전역 변수를 선언하게 되면, window 객체 안에 등록이 된다는 것입니다.  
+다음처럼요!!
+
+```javascript
+var family = 'Duck Family';
+window.family; // Duck Family
+```
+
+<br />
+
+여기서 주의할 점은 함수 내에 있다고 해서 전역변수에 접근할 수 없다는 것이 아닙니다.  
+아까와는 달리 함수 내에 var를 선언하지 않겠습니다.
+
+```javascript
+var duck = '미더덕';
+
+function duck_family() {
+ duck = '미더덕 동생';
+}
+
+duck_family();
+console.log(duck); // 미더덕 동생
+```
+
+짠! 전역 변수가 바꼈죠?  
+변수의 범위가 지역 스코프부터 시작해서 전역 스코프로 범위를 점차 넓혀가며 찾아보기 때문입니다. duck_family() 범위 안에 변수가 없기 때문에 전역 스코프 내에 있는 duck 변수를 찾은거죠.
+
+<br />
+
+지금까지 Global Scope(전역 스코프), Local Scope(지역 스콮)에 대해서 알아보았습니다.  
+
+하지만! 여기까지만 알아보기는 아쉬우니 더 깊이 있는 스코프 지식을 위해 다음에는 const, let과 관련해서 **함수 스코프**와 **블록 유효범위 스코프**에 대해서도 살펴볼게요!
+
+<br />
+<hr />
+<br />
+
+##### 참고
+[https://www.zerocho.com/category/JavaScript/post/5740531574288ebc5f2ba97e](https://www.zerocho.com/category/JavaScript/post/5740531574288ebc5f2ba97e)
