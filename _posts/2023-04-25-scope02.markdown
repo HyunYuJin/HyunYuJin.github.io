@@ -27,8 +27,16 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 
 ### var, const / let의 스코프
 
+* var: 함수 스코프를 갖는 변수 선언에 사용됩니다.
+* const / let: 블록 스코프를 갖는 지역 변수를 선언하는데 사용됩니다.
+  * const: 단 한번만 할당할 수 있는 상수(변수)를 선언하는데 사용. 재선언, 변수 재할당 불가능. 반드시 초기화 필요.
+  * let: 재선언이 불가능. 변수 재할당은 가능.
+
+<br />
+
 #### 함수 스코프
-<code style="color: #3ec43e;">var</code>,<code style="color: #e4a3ff;">const</code>와 <code style="color: #6d2f9a;">let</code>은 선언한 함수 내에서 유효합니다.
+선언한 함수 내에 있는 
+<code style="color: #3ec43e;">var</code>,<code style="color: #e4a3ff;">const</code>와 <code style="color: #6d2f9a;">let</code>은 모두 해당 함수 내에서 유효합니다.
 
 * 예시 1 - <code style="color: #3ec43e;">var</code>
   ```javascript
@@ -51,7 +59,7 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 * 예시2 - <code style="color: #e4a3ff;">const</code>
   ```javascript
   function duckHello() {
-    const hello = 'Hello Duck!'; // const는 선언과 동시에 반드시 값이 할당 되어야 합니다!
+    const hello = 'Hello Duck!';
     console.log(hello);
   }
 
@@ -62,8 +70,8 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 <br />
 
 #### 블록 스코프
-{} 내부에서 <code style="color: #e4a3ff;">const</code> 또는 <code style="color: #6d2f9a;">let</code>으로 변수를 선언하면 그 변수들은 {} 내부에서만 유효합니다.  
-하지만 var는 아닙니다!
+그러나 {}(블록) 내부에서 선언한 <code style="color: #3ec43e;">var</code>는 블록 바깥에서도 유효하지만,   
+<code style="color: #e4a3ff;">const</code>와 <code style="color: #6d2f9a;">let</code>은 {} 내부에서만 유효합니다. 
 
 * 예시 1 - if문 <code style="color: #3ec43e;">var</code>, <code style="color: #6d2f9a;">let</code>
   ```javascript
