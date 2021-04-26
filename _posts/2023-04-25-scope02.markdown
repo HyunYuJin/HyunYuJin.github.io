@@ -6,7 +6,7 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 ---
 
 > 💡 지난시간에는 Global Scope(전역 스코프), Local Scope(지역 스코프)에 대해서 살펴보았습니다.
-> 이번시간에는 ES6에서 등장한 const, let과 관련하여 Function Scope(함수 스코프)와 Block Scope(블록 스코프)에 대해서도 알아보겠습니다 :)
+> 이번시간에는 ES6에서 등장한 <code style="color: #e4a3ff;">const</code>, <code style="color: #6d2f9a;">let</code>과 관련하여 Function Scope(함수 스코프)와 Block Scope(블록 스코프)에 대해서도 알아보겠습니다 :)
 
 <br />
 
@@ -27,35 +27,73 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 
 ### var, const / let의 스코프
 
-var은 함수 스코프를 따르지만, 블록 스코프를 따르지 않습니다.
-
 #### 함수 스코프
-```javascript
-var a = 30;
+<code style="color: #3ec43e;">var</code>와는 다르게, <code style="color: #e4a3ff;">const</code>와 <code style="color: #6d2f9a;">let</code>은 선언한 함수 내에서만 유효합니다.
 
-(function() {
-  var a = 10;
+* 예시 1 - <code style="color: #3ec43e;">var</code>
+  ```javascript
+  var a = 30;
 
   (function() {
-      var a = 20;
-      console.log(a); // 20
-  })()
-  
-    console.log(a) // 10
-})()
+    var a = 10;
 
-console.log(a); // ReferenceError: a is not defined
-```
+    (function() {
+        var a = 20;
+        console.log(a); // 20
+    })()
+    
+      console.log(a) // 10
+  })()
+
+  console.log(a); // ReferenceError: a is not defined
+  ```
+
+* 예시2 - <code style="color: #e4a3ff;">const</code>
+  ```javascript
+  function duckHello() {
+    const hello = 'Hello Duck!';
+    console.log(hello);
+  }
+
+  duckHello(); // 'Hello Duck!'
+  console.log(hello); // Error, hello is not defined
+  ```
+
+<br />
 
 #### 블록 스코프
-```javascript
-if (true){
-  var var_name = 'var 미더덕';
-  let let_name = 'let 미더덕';
-}
-console.log(var_name); // var 미더덕
-console.log(let_name); // ReferenceError: let_name is not defined
-```
+{} 내부에서 <code style="color: #e4a3ff;">const</code> 또는 <code style="color: #6d2f9a;">let</code>으로 변수를 선언하면 그 변수들은 {} 내부에서만 유효합니다.  
+하지만 var는 아닙니다!
+
+* 예시 1 - if문 <code style="color: #3ec43e;">var</code>, <code style="color: #6d2f9a;">let</code>
+  ```javascript
+  if (true){
+    var var_name = 'var 미더덕';
+    let let_name = 'let 미더덕';
+  }
+  console.log(var_name); // var 미더덕
+  console.log(let_name); // ReferenceError: let_name is not defined
+  ```
+
+* 예시 2 - {} <code style="color: #e4a3ff;">const</code>
+  ```javascript
+  {
+    const const_name = 'const 미더덕';
+    console.log(hello); // 'const 미더덕'
+  }
+  console.log(hello); // Error, const_name is not defined
+  ```
+
+* 예시 3 - for문 <code style="color: #3ec43e;">var</code>, <code style="color: #6d2f9a;">let</code>
+  ```javascript
+  for(var var_i=0; var_i<5; var_i++){ }
+  console.log(var_i); // 5
+
+  for(let let_i = 0; let_i < 5; let_i++){ }
+  console.log(let_i); // ReferenceError: let_i is not defined
+  ```
+
+
 
 <br />
 <hr />
