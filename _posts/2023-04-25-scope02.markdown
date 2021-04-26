@@ -28,7 +28,7 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 ### var, const / let의 스코프
 
 #### 함수 스코프
-<code style="color: #3ec43e;">var</code>와는 다르게, <code style="color: #e4a3ff;">const</code>와 <code style="color: #6d2f9a;">let</code>은 선언한 함수 내에서만 유효합니다.
+<code style="color: #3ec43e;">var</code>,<code style="color: #e4a3ff;">const</code>와 <code style="color: #6d2f9a;">let</code>은 선언한 함수 내에서 유효합니다.
 
 * 예시 1 - <code style="color: #3ec43e;">var</code>
   ```javascript
@@ -51,7 +51,7 @@ description: Function Scope(함수 스코프), Block Scope(블록 스코프)에 
 * 예시2 - <code style="color: #e4a3ff;">const</code>
   ```javascript
   function duckHello() {
-    const hello = 'Hello Duck!';
+    const hello = 'Hello Duck!'; // const는 선언과 동시에 반드시 값이 할당 되어야 합니다!
     console.log(hello);
   }
 
